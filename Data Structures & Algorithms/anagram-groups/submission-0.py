@@ -1,15 +1,12 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        res = defaultdict(list)
+        hmap = defaultdict(list)
 
         for s in strs:
-            sortedS = tuple(sorted(s))
-            if sortedS not in res:
-                res[sortedS] = [s]
-            else:
-                res[sortedS].append(s)
-        return res.values()
+            count = [0] * 26
+            for c in s:
+                count[ord(c) - ord('a')] += 1
 
-
-   
-        
+ 
+            hmap[tuple(count)].append(s)
+        return list(hmap.values())

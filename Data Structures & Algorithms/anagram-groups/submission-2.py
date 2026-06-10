@@ -1,8 +1,16 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        hmap = defaultdict(list)
+        
+        d= defaultdict(list)
+        for s in strs:
+            count = [0]*26
+            for i in s:
+                count[ord(i)- 97]+=1
+            if str(count) in d:
+                d[str(count)].append(s)
+            else:
+                d[str(count)] = [s]
 
-        for i in range(len(strs)):
-            key = tuple(sorted(strs[i]))
-            hmap[key].append(strs[i])
-        return hmap.values()
+        return (list(d.values()))
+
+        
