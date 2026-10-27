@@ -1,25 +1,23 @@
 class Solution:
 
     def encode(self, strs: List[str]) -> str:
-        res = ''
+        res = ""
         for s in strs:
-            res += str(len(s)) + "#" + s 
+            res += str(len(s)) + "$" + s
+
         return res
 
     def decode(self, s: str) -> List[str]:
-        res = []
+
         i = 0
-
+        res = []
         while i < len(s):
-            j = i
-            while s[j] != '#':
-                j += 1
-            length = int(s[i:j])
-            i = j + 1
-            j = i + length
-            res.append(s[i:j])
-            i=j
-        return res
-
-
+            n = ""
+            while s[i] != "$":
+                n += s[i]
+                i += 1
+            n = int(n)
+            res.append(s[i+1:i+n+1])
+            i = i+n+1
+        
         return res
