@@ -1,0 +1,27 @@
+class Solution:
+    def calculate(self, s: str) -> int:
+        
+        stk = []
+        num = 0
+        op = '+'
+        s = s.replace(' ', '')
+
+        for i, c in enumerate(s):
+            if c.isdigit():
+                num = num * 10 + int(c)
+
+            if (not c.isdigit()) or i == len(s) - 1:
+                if op == "+":
+                    stk.append(num)
+                elif op == "-":
+                    stk.append(-num)
+                elif op == "*":
+                    stk.append(stk.pop() * num)
+                else:
+                    prev = stk.pop()
+                    stk.append(int(prev/num))
+                op = c
+                num = 0
+
+        return sum(stk)                
+   
